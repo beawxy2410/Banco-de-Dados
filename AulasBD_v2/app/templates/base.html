@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Aulas BD</title>
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+    <!-- CABECALHO DA PAGINA -->
+    <header>
+        <h2>Aulas BD</h2>
+    </header>
+    <!-- MENU LATERAL DE NAVEGACAO -->
+    <nav>
+        <ul>
+            <li>  <a href="{% url 'home' %}">Home</a>  </li>
+            <li>  <a href="{% url 'exercicio_1' %}">Exercício-1</a>  </li>
+            <li>  <a href="{% url 'exercicio_2' %}">Exercício-2</a>  </li>
+        </ul>
+    </nav>
+    
+    <!-- CONTEUDO DAS PAGINAS -->
+    <main>
+        <!-- Este bloco será utilizado para exiir o título da página -->
+        <div id="titulo_pagina">
+            {% block titulo_pagina %}
+                Título da Página
+            {% endblock %}            
+        </div>
+        <!-- Exibe mensagem de ERRO, caso tenha ocorrido algum -->
+        {% if ERRO %}
+            <h3 class="erro">ERRO: {{ERRO}}</h3>
+        {% endif %}            
+        <!-- Este bloco será utilizado para inserir o conteúdo das páginas. -->
+        <div id="conteudo">
+            {% block conteudo %}
+                Conteúdo da Página
+            {% endblock %}
+        </div>
+    </main>
+</body>
