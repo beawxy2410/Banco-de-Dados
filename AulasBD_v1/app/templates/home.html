@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Aulas BD</title>
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+
+    <header><h1>Northwind - Versão 1.0</h1></header>
+
+    <!-- exibe mensagem caso tenha ocorrido algum erro -->
+    {% if ERRO %}
+        <h3 class="erro">ERRO: {{ERRO}}</h3>
+    {% endif %}
+
+    <!-- exibe registros de categorias -->
+    <h2>Categorias</h2>
+    {% for reg in categorias %}
+        {{reg.0}} - {{reg.1}} <br>
+    {% endfor %}   
+
+    <!-- exibe registros de produtos -->
+    <h2>Produtos</h2>
+    {% for reg in produtos %}
+        {{reg.0}} - {{reg.1}} <br>
+    {% endfor %}
+
+
+</body>
+</html>
+
+
+

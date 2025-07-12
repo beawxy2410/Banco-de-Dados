@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>INSTRUÇÕES</title>
+    <link rel="stylesheet" href="assets/css/estilo.css">
+</head>
+<body>
+<main>
+<h1>Instruções deste Projeto</h1>
+
+<!-- ========================================================= -->
+<hr>
+<h2>1) Preparação do Ambiente de Desenvolvimento</h2>
+
+<p>
+Abra o terminal de comandos (prompt) e execute o comando a seguir:
+<br>
+<code class="terminal">pip list</code>
+</p>
+
+<p>
+Verifique a lista de pacotes do Python que estão instalados:
+</p>
+<pre>
+<code class="terminal">
+Package                Version
+---------------------- -----------
+Django                 5.0.14
+pyodbc                 5.2.0
+pip                    25.1.1
+pkgconfig              1.5.5
+python-dateutil        2.9.0.post0
+pytz                   2025.2
+setuptools             78.1.0
+typing_extensions      4.13.2            
+</code>
+</pre>
+
+<p>
+Para esta aula precisaremos que os seguintes pacotes estejam instalados:
+</p>
+<pre>
+<code class="terminal">
+Package    
+-----------
+Django
+pyodbc
+</code>
+</pre>
+
+<p>
+Caso algum deles não esteja instalado, execute os comandos a seguir:
+</p>
+<pre>
+<code class="terminal">
+pip install Django
+</code>
+</pre>
+<pre>
+<code class="terminal">
+pip install pyodbc
+</code>
+</pre>
+
+<!-- ========================================================= -->
+<hr>
+<h2>2) Testando o Projeto</h2>
+
+<p>
+Agora abra o projeto no VSCode
+<br>
+</p>
+<img src="assets/imagens/1-abra-projeto.jpg" width="250">
+
+<p>
+Abra o arquivo <code>app/views.py</code>
+</p>
+<img src="assets/imagens/2-views.jpg" height="400">
+
+<p>
+Altere os parâmetros de conexão com o banco dados para que funcione no seu computador. 
+<br>
+Na maioria dos casos, você precisará alterar apenas a <code>senha</code> de acesso.
+</p>
+<img src="assets/imagens/3-parametros.jpg" height="150">
+
+<p>
+Agora abra o terminal dentro do próprio VSCode. 
+<br>
+Menú: <code>View/Terminal</code> ou utilize o atalho <code>Ctrl + '</code>.
+</p>
+<img src="assets/imagens/4-terminal.jpg" width="320">
+
+
+<p>
+Em seguida, execute a aplicação através do comando  <code>python manage.py runserver</code>.
+</p>
+<img src="assets/imagens/4-runserver.jpg" height="220">
+
+
+<p>
+Pra finalizar, abra o navegador e acesse o endereço 
+<code><a href="http://localhost:8000/">localhost:8000</a></code> para acessar a aplicação.
+<br>
+Se tudo foi OK, você verá a seguinte página:
+</p>
+<img src="assets/imagens/5-site-ok.jpg" width="700">
+
+<p>
+Se der algum <span class="erro">ERRO</span>, a página irá exibir a mensagem do problema ocorrido.
+<br>
+Neste caso, resolva o problema para poder carregar a aplicação corretamente.
+</p>
+<img src="assets/imagens/6-site-erro.jpg" width="600">
+
+
+<!-- ========================================================= -->
+<hr>
+<h2>3) Explicação do Código</h2>
+
+<h3>Arquivo <code>views.py</code></h3>
+<p>
+No arquivo <code>app/views.py</code> definimos um método chamado <code>home</code> que será responsável por exibir a página inicial da nossa aplicação.
+<br>
+O código dentro deste método foi protegido com a utilização dos blocos <code>try..except</code>.
+<!-- <br> -->
+Isso é importante para possamos tomar alguma ação caso ocorra um erro de execução.
+<br>
+Caso ocorra algum erro, o código dentro do bloco <code>except</code> será executado. Aqui estamos enviando a mensagem do problema ocorrido para ser exibida na página utilizando o parâmetro <code>context</code> da função <code>render()</code>.
+</p>
+<img src="assets/imagens/7-explicando-3.jpg" width="47%">
+
+
+<p>
+Na primeira parte do código dentro do bloco <code>try</code> fazemos o seguinte:
+<ol>
+    <li>Definimos os parâmetros de conexão com o BD (<code>driver</code>, <code>servidor</code>, <code>usuario</code> etc);</li>
+    <li>Definimos uma string de conexão contendo as informações de acesso (<code>string_conexao</code>);</li>
+    <li>Chamamos o método <code>pyodbc.connect()</code> para efetuar a conexão com o BD, armazenando o objeto de conexão criado na variável <code>conexao</code>;</li>
+    <li>Imprimimos no terminal a mensagem de "Conexão bem-sucedida!".</li>
+</ol> 
+</p>
+<img src="assets/imagens/7-explicando-4.jpg" width="60%">
+
+
+<p>
+Em seguida, fazemos o seguinte:
+<ol>
+    <li>criamos um objeto <code>cursor</code> através do método <code>conexao.cursor()</code>. O <code>cursor</code> será utilizado para executar os comandos em Linguagem SQL no banco de dados;</li>
+    <li>Definimos um comando <i>SELECT</i> para retornar os registros da tabela <strong>Produtos</strong> e o executamos através do método <code>cursor.execute()</code>;</li>
+    <li>Usamos o método <code>cursor.fetchall()</code> para termos acesso a todos os registros retornados pelo comando <i>SELECT</i>, guardando-os na variável <code>lista_produtos</code>; </li>
+    <li>Depois reutilizamos o mesmo objeto <code>cursor</code> já criado anteriormente para executar o comando <i>SELECT</i> para retornar todos os registros da tabela <strong>Categorias</strong>, guardando os registros retornados na variável <code>lista_categorias</code>.</li>
+</ol> 
+</p>
+<img src="assets/imagens/7-explicando-5.jpg" width="50%">
+
+<p>
+Por fim, utilizamos o método <code>render()</code> para:
+<ol>
+    <li>Definir qual página (<i>template</i>) será exibida. Aqui será a página <code>home.html</code> que fica dentro da pasta <code>app/templates/</code>;</li>
+    <li>Adicionamos as listas de produtos e categorias no contexto (<i>context</i>) para que possamos acessar as variáveis <code>lista_produtos</code> e <code>lista_categorias</code> dentro da página <code>home.html</code>.</li>
+</ol> 
+
+</p>
+<img src="assets/imagens/7-explicando-6.jpg" width="50%">
+
+
+<h3>Arquivo <code>urls.py</code></h3>
+<p>
+No arquivo <code>proj_bd/urls.py</code> definimos uma <strong>rota URL</strong> usando o método <code>path()</code>, a qual redireciona a URL chamada no navegador para o método <code>home()</code> de <code>app/views.py</code>.
+<br>
+Como o primeiro parâmetro do método <code>path()</code> está definido como vazio (<code>''</code>), esta rota será executada quando acessarmos a URL raiz da nossa aplicação no navegador, ou seja <code>localhost:8000</code>. 
+<br>
+No segundo parâmetro de <code>path()</code> definimos qual método deve ser chamado. 
+Neste caso, <code>views.home</code> irá chamar o método <code>home()</code> dentro de <code>app/views.py</code>.
+<br>
+Mas para termos acesso a <code>views.home</code> dentro de <code>urls.py</code>, primeiramente devemos fazer a importação do arquivo <code>app/views.py</code> através da instrução <code>from app import views</code>.
+</p>
+<img src="assets/imagens/7-explicando-7.jpg" width="47%">
+
+
+
+
+<h3>Arquivo <code>settings.py</code></h3>
+<p>
+Para tudo funcionar direito, devemos adicionar a pasta <code>app</code> da nossa aplicação dentro da variável <i>INSTALLED_APPS</i> no arquivo <code>proj_bd/settings.py</code>
+</p>
+<img src="assets/imagens/7-explicando-8.jpg" width="43%">
+
+
+</main>
+</body>
+</html>

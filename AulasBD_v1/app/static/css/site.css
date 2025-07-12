@@ -1,0 +1,17 @@
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}   
+
+header{
+    font-style: italic;
+    color:steelblue
+}
+    
+.erro{
+    color: red;
+    background-color: yellow;
+    padding: 10px;
+    border: 1px solid red;
+    width: 90%;
+    border-radius: 10px;
+}
