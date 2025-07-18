@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo_pagina %}
+    <h2>Home</h2>
+{% endblock %}  
+
+{% block conteudo %}
+    <h3>Seja bem vindo!!!</h3>
+
+    <div class="cardrow">
+        <div class="componente">
+            <img src="{% static 'imagens/Igor.png' %}" alt="Foto do Igor" >
+            <p>Igor Batista Marques da Silva</p>
+      
+        </div>
+        <div class="componente">
+            <img src="{% static 'imagens/Juliana.png' %}" alt="Foto da Juliana">
+            <p>Juliana Beatriz de Lima Araújo</p>
+    
+        </div>        
+    </div>
+
+{% endblock %}
+
+
+
+
+

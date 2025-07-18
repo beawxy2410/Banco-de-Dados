@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block titulo_pagina %}
+    <h2>Questão 3B</h2>
+{% endblock %}  
+
+{% block conteudo %}
+    <!-- TABELA HTML COM OS REGISTROS -->
+    <table>
+        <!-- CABECALHO DA TABELA HTML -->
+        <thead>
+            <tr>
+                <th>Data Venda</th>
+                <th>Valor Total</th>
+                <th>Produto</th>
+                <th>Cliente</th>
+                <th>Vendedor</th>
+            </tr>
+        </thead>
+        <!-- LINHAS DA TABELA HTML CONTENDO OS REGISTROS -->
+        <tbody>
+            <!-- LOOP PARA PEGAR CADA REGISTRO -->
+            {% for reg in registros %}
+            <tr>
+                <td>{{ reg.0 }}</td>
+                <td>{{ reg.1 }}</td>
+                <td>{{ reg.2 }}</td>
+                <td>{{ reg.3 }}</td>
+                <td>{{ reg.4 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+
